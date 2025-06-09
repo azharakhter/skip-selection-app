@@ -16,6 +16,8 @@ import PageContainer from '../../components/Layout/PageContainer';
 import ResponsiveGrid from '../../components/Layout/ResponsiveGrid';
 import useFetchSkips from './useFetchSkips';
 import { useSelection } from './selectionContext';
+import { formatPrice } from '../../utils/formatters';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 const SkipSelection = () => {
     const theme = useTheme();
@@ -33,6 +35,7 @@ const SkipSelection = () => {
     const handleRetry = () => {
         refetch();
     };
+
 
     const handleCloseSnackbar = () => {
         setSnackbarOpen(false);
@@ -103,7 +106,8 @@ const SkipSelection = () => {
 
                 <Box sx={{
                     display: 'flex',
-                    justifyContent: 'flex-end',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
                     mt: 6,
                     position: 'sticky',
                     bottom: 20,
@@ -114,25 +118,65 @@ const SkipSelection = () => {
                     boxShadow: theme.shadows[2],
                     px: 3
                 }}>
-                    <Button
-                        variant="contained"
-                        size="large"
-                        disabled={!selectedSkip}
-                        onClick={nextStep}
-                        sx={{
-                            py: 1.5,
-                            px: 6,
-                            fontWeight: 'bold',
-                            fontSize: '1.1rem',
-                            transform: 'scale(1)',
-                            transition: 'transform 0.3s',
-                            '&:hover': {
-                                transform: 'scale(1.03)'
-                            }
-                        }}
-                    >
-                        Next
-                    </Button>
+                    <Box>
+                        <Typography variant="caption" sx={{
+                            color: 'text.secondary',
+                            display: 'block',
+                            maxWidth: 600
+                        }}>
+                            Imagery and information shown throughout this website may not reflect the exact shape or size specification, colours may vary, options and/or accessories may be featured at additional cost.
+                        </Typography>
+
+                        {selectedSkip && (
+                            <Box sx={{ display: 'flex', alignItems: 'center', mt: 1 }}>
+                                <Typography variant="subtitle1" sx={{ fontWeight: 'bold', mr: 2 }}>
+                                    {selectedSkip.name}
+                                </Typography>
+                                <Typography variant="subtitle1" sx={{ fontWeight: 'bold', color: 'primary.main', mr: 2 }}>
+                                    {formatPrice(selectedSkip.price_before_vat)}
+                                </Typography>
+                                <Typography variant="subtitle1" sx={{ fontWeight: 'medium' }}>
+                                    {selectedSkip.hire_period_days} day hire
+                                </Typography>
+                            </Box>
+                        )}
+                    </Box>
+
+                    <Box>
+                        <Button
+                            variant="outlined"
+                            size="large"
+                            startIcon={<ArrowBackIcon />}
+                            sx={{
+                                py: 1.5,
+                                px: 4,
+                                fontWeight: 'bold',
+                                fontSize: '1rem',
+                                mr: 2
+                            }}
+                        >
+                            Back
+                        </Button>
+                        <Button
+                            variant="contained"
+                            size="large"
+                            disabled={!selectedSkip}
+                            onClick={() => { }}
+                            sx={{
+                                py: 1.5,
+                                px: 6,
+                                fontWeight: 'bold',
+                                fontSize: '1.1rem',
+                                transform: 'scale(1)',
+                                transition: 'transform 0.3s',
+                                '&:hover': {
+                                    transform: 'scale(1.03)'
+                                }
+                            }}
+                        >
+                            Next
+                        </Button>
+                    </Box>
                 </Box>
             </Container>
 

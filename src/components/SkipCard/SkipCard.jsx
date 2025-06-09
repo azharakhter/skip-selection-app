@@ -23,6 +23,7 @@ import ScaleIcon from '@mui/icons-material/Scale';
 import { useTheme } from '@mui/material/styles';
 import { formatPrice } from '../../utils/formatters';
 import { cardStyles } from './SkipCard.styles';
+
 import { useSelection } from '../../features/SkipSelection/selectionContext';
 
 // Import all skip images
