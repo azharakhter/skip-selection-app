@@ -1,24 +1,47 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useMemo } from 'react';
+import {
+  ThemeProvider as MuiThemeProvider,
+  CssBaseline,
+  IconButton,
+  Box
+} from '@mui/material';
+import { ThemeProvider as StyledThemeProvider } from 'styled-components';
+import Brightness4Icon from '@mui/icons-material/Brightness4';
+import Brightness7Icon from '@mui/icons-material/Brightness7';
+import { GlobalStyles } from './assets/styles/globalStyles';
+import { lightTheme, darkTheme } from './assets/styles/theme';
+import SkipSelection from './features/SkipSelection/SkipSelection';
+import { SelectionProvider } from './features/SkipSelection/selectionContext';
 
 function App() {
+  const [darkMode, setDarkMode] = useState(false);
+  const theme = useMemo(() =>
+    darkMode ? darkTheme : lightTheme
+    , [darkMode]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <MuiThemeProvider theme={theme}>
+      <StyledThemeProvider theme={theme}>
+        <CssBaseline />
+        <GlobalStyles />
+        <SelectionProvider>
+          <Box sx={{
+            position: 'fixed',
+            top: 16,
+            right: 16,
+            zIndex: 1200
+          }}>
+            <IconButton
+              onClick={() => setDarkMode(!darkMode)}
+              color="inherit"
+            >
+              {darkMode ? <Brightness7Icon /> : <Brightness4Icon />}
+            </IconButton>
+          </Box>
+          <SkipSelection />
+        </SelectionProvider>
+      </StyledThemeProvider>
+    </MuiThemeProvider>
   );
 }
 
