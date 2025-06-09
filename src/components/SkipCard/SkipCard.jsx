@@ -204,21 +204,23 @@ const SkipCard = ({ skip, loading }) => {
                     </Stack>
 
                     {/* Updated description section with line clamping */}
-                    <Box sx={cardStyles.descriptionContainer}>
-                        <Box sx={cardStyles.descriptionRow}>
-                            <Typography variant="body2" sx={cardStyles.descriptionText}>
-                                {skip?.description || "This is a short to.. "}
-                            </Typography>
-                            <Button
-                                variant="text"
-                                size="small"
-                                onClick={handleReadMore}
-                                sx={cardStyles.readMoreButton}
-                            >
-                                Read More
-                            </Button>
-                        </Box>
-                    </Box>
+                    <Typography variant="body2" sx={cardStyles.descriptionText}>
+                        {skip?.description || (
+                            <>
+                                This is a short to This working <br />
+                                a short to..a is a short to..a
+                            </>
+                        )}
+
+                    </Typography>
+                    <Button
+                        variant="text"
+                        size="small"
+                        onClick={handleReadMore}
+                        sx={cardStyles.readMoreButton}
+                    >
+                        Read More
+                    </Button>
 
 
                     <Divider sx={{ my: 2 }} />

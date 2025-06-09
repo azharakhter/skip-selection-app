@@ -39,24 +39,19 @@ export const cardStyles = {
         fontWeight: 800,
         color: 'primary.main',
     },
-    descriptionContainer: {
-        position: 'relative',
-        mb: 2,
-        minHeight: '4.5em', // Fixed height for 3 lines of text
-    },
-    descriptionRow: {
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        gap: 1,
-    },
     descriptionText: {
         color: 'text.secondary',
+        display: '-webkit-box',
+        WebkitLineClamp: 2,
+        WebkitBoxOrient: 'vertical',
         overflow: 'hidden',
-        whiteSpace: 'nowrap',
         textOverflow: 'ellipsis',
+        whiteSpace: 'normal',
+        wordBreak: 'break-word',
         flexGrow: 1,
     },
+
+
     readMoreButton: {
         flexShrink: 0,
         paddingLeft: '2px',
