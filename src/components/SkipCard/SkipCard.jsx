@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
     Card,
     CardContent,
@@ -10,7 +10,11 @@ import {
     CardMedia,
     Divider,
     Tooltip,
-    Stack
+    Stack,
+    Dialog,
+    DialogTitle,
+    DialogContent,
+    DialogActions
 } from '@mui/material';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import LocalShippingIcon from '@mui/icons-material/LocalShipping';
@@ -50,6 +54,7 @@ const SkipCard = ({ skip, loading }) => {
     const theme = useTheme();
     const { selectedSkip, setSelectedSkip } = useSelection(null);
     const isSelected = selectedSkip?.id === skip.id;
+    const [dialogOpen, setDialogOpen] = useState(false);
 
     // Get image based on skip size
     const skipImage = sizeToImage[skip.size] || defaultYard;
@@ -58,6 +63,14 @@ const SkipCard = ({ skip, loading }) => {
         return null;
     };
 
+    const handleReadMore = (e) => {
+        e.stopPropagation();
+        setDialogOpen(true);
+    };
+
+    const handleCloseDialog = () => {
+        setDialogOpen(false);
+    };
 
     return (
         <Fade in={!loading} timeout={500}>
@@ -170,18 +183,18 @@ const SkipCard = ({ skip, loading }) => {
 
                     <Box sx={{ display: 'flex', alignItems: 'baseline', gap: 1, mb: 1 }}>
                         <Typography variant="h5" sx={cardStyles.price}>
-                            {formatPrice(skip.price)}
+                            {formatPrice(skip.price_before_vat)}
                         </Typography>
                         <Typography variant="body2" sx={{ color: 'text.secondary' }}>
                             +VAT
                         </Typography>
                     </Box>
 
-                    <Stack direction="row" spacing={1} sx={{ mb: 2 }}>
+                    <Stack direction="row" spacing={3} sx={{ mb: 2, mt: 2 }}>
                         <Chip
                             label={`${skip.size} yd³`}
                             color="secondary"
-                            sx={{ fontWeight: 'bold' }}
+                            sx={{ fontWeight: 'bold', fontSize: '1.4rem' }}
                         />
                         <Chip
                             label={`${skip.hire_period_days} day hire`}
@@ -190,9 +203,23 @@ const SkipCard = ({ skip, loading }) => {
                         />
                     </Stack>
 
-                    <Typography variant="body2" sx={cardStyles.description}>
-                        {skip.description}
-                    </Typography>
+                    {/* Updated description section with line clamping */}
+                    <Box sx={cardStyles.descriptionContainer}>
+                        <Box sx={cardStyles.descriptionRow}>
+                            <Typography variant="body2" sx={cardStyles.descriptionText}>
+                                {skip?.description || "This is a short to.. "}
+                            </Typography>
+                            <Button
+                                variant="text"
+                                size="small"
+                                onClick={handleReadMore}
+                                sx={cardStyles.readMoreButton}
+                            >
+                                Read More
+                            </Button>
+                        </Box>
+                    </Box>
+
 
                     <Divider sx={{ my: 2 }} />
 
@@ -220,6 +247,24 @@ const SkipCard = ({ skip, loading }) => {
                         {isSelected ? 'Selected' : 'Select Skip'}
                     </Button>
                 </Box>
+
+                {/* Description Modal */}
+                <Dialog open={dialogOpen} onClose={handleCloseDialog}>
+                    <DialogTitle>{skip.name} Details</DialogTitle>
+                    <DialogContent>
+                        <Typography variant="body1">
+                            {skip?.description ||
+                                `This ${skip.size} cubic yard skip is ideal for ${skip.size < 10 ? 'small' :
+                                    skip.size < 15 ? 'medium' : 'large'} projects. It comes with a ${skip.hire_period_days}-day hire period.`
+                            }
+                        </Typography>
+                    </DialogContent>
+                    <DialogActions>
+                        <Button onClick={handleCloseDialog} color="primary">
+                            Close
+                        </Button>
+                    </DialogActions>
+                </Dialog>
             </Card>
         </Fade>
     );

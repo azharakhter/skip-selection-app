@@ -1,3 +1,4 @@
+// SkipCard.styles.js
 export const cardStyles = {
     card: (isSelected, theme) => ({
         border: isSelected
@@ -38,12 +39,34 @@ export const cardStyles = {
         fontWeight: 800,
         color: 'primary.main',
     },
-    description: {
-        color: 'text.secondary',
+    descriptionContainer: {
+        position: 'relative',
         mb: 2,
-        minHeight: '3em',
-        lineHeight: 1.5,
+        minHeight: '4.5em', // Fixed height for 3 lines of text
     },
+    descriptionRow: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        gap: 1,
+    },
+    descriptionText: {
+        color: 'text.secondary',
+        overflow: 'hidden',
+        whiteSpace: 'nowrap',
+        textOverflow: 'ellipsis',
+        flexGrow: 1,
+    },
+    readMoreButton: {
+        flexShrink: 0,
+        paddingLeft: '2px',
+        minWidth: 'auto',
+        textTransform: 'none',
+        '&:hover': {
+            textDecoration: 'underline',
+        },
+    },
+
     featureItem: {
         color: 'text.secondary',
         fontSize: '0.9rem',
