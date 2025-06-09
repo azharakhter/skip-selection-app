@@ -3,10 +3,12 @@ export const cardStyles = {
         border: isSelected
             ? `2px solid ${theme.palette.primary.main}`
             : `1px solid ${theme.palette.divider}`,
-        // borderRadius: theme.shape.borderRadius * 2,
         overflow: 'hidden',
         transition: 'all 0.3s ease',
         cursor: 'pointer',
+        display: 'flex',
+        flexDirection: 'column',
+        height: '100%',
         '&:hover': {
             transform: 'translateY(-5px)',
             boxShadow: theme.shadows[6],
@@ -17,6 +19,7 @@ export const cardStyles = {
     }),
     image: {
         objectFit: 'cover',
+        width: '100%',
     },
     header: {
         display: 'flex',
@@ -25,29 +28,26 @@ export const cardStyles = {
         mb: 1,
     },
     title: {
-        fontWeight: 600,
+        fontWeight: 700,
+        fontSize: '1.1rem',
     },
     icon: {
         fontSize: '1.5rem',
     },
     price: {
-        fontWeight: 700,
+        fontWeight: 800,
         color: 'primary.main',
-        mb: 1,
-    },
-    sizeChip: {
-        mb: 2,
-        fontWeight: 'bold',
-        fontSize: '1rem',
     },
     description: {
         color: 'text.secondary',
         mb: 2,
         minHeight: '3em',
+        lineHeight: 1.5,
     },
     featureItem: {
         color: 'text.secondary',
         fontSize: '0.9rem',
-        mb: 0.5,
+        mb: 1,
+        lineHeight: 1.4,
     },
 };

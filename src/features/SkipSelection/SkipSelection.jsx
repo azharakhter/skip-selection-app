@@ -92,7 +92,7 @@ const SkipSelection = () => {
                         ))}
                     </ResponsiveGrid>
                 ) : (
-                    <ResponsiveGrid spacing={3}>
+                    <ResponsiveGrid spacing={2}>
                         {skips?.map((skip) => (
                             <SkipCard
                                 key={skip.id}

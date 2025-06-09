@@ -9,11 +9,13 @@ import {
     Chip,
     CardMedia,
     Divider,
-    Tooltip
+    Tooltip,
+    Stack
 } from '@mui/material';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import LocalShippingIcon from '@mui/icons-material/LocalShipping';
 import WarningIcon from '@mui/icons-material/Warning';
+import ScaleIcon from '@mui/icons-material/Scale';
 import { useTheme } from '@mui/material/styles';
 import { formatPrice } from '../../utils/formatters';
 import { cardStyles } from './SkipCard.styles';
@@ -59,7 +61,7 @@ const SkipCard = ({ skip, loading }) => {
                 onClick={() => setSelectedSkip(skip)}
                 elevation={isSelected ? 8 : 2}
             >
-                {/* Image with road allowance indicator */}
+                {/* Image with indicators */}
                 <Box sx={{ position: 'relative' }}>
                     <CardMedia
                         component="img"
@@ -69,34 +71,79 @@ const SkipCard = ({ skip, loading }) => {
                         sx={cardStyles.image}
                     />
 
-                    {/* Road Allowance Indicator */}
-                    <Tooltip
-                        title={skip.allowed_on_road
-                            ? "Allowed on public roads"
-                            : "Not allowed on public roads - Permit required"
-                        }
-                        placement="top"
-                    >
-                        <Chip
-                            icon={skip.allowed_on_road ? <LocalShippingIcon /> : <WarningIcon />}
-                            label={skip.allowed_on_road ? "Road Legal" : "Needs Permit"}
-                            size="small"
-                            sx={{
-                                position: 'absolute',
-                                bottom: 10,
-                                right: 10,
-                                backgroundColor: skip.allowed_on_road
-                                    ? theme.palette.success.light
-                                    : theme.palette.warning.light,
-                                color: theme.palette.getContrastText(
-                                    skip.allowed_on_road
+                    {/* Top indicators */}
+                    <Box sx={{
+                        position: 'absolute',
+                        top: 10,
+                        left: 0,
+                        right: 0,
+                        display: 'flex',
+                        justifyContent: 'space-between',
+                        px: 1,
+                        gap: 1
+                    }}>
+                        {/* Road Allowance */}
+                        <Tooltip
+                            title={skip.allowed_on_road
+                                ? "Allowed on public roads"
+                                : "Not allowed on public roads - Permit required"
+                            }
+                            placement="top"
+                        >
+                            <Chip
+                                icon={skip.allowed_on_road ? <LocalShippingIcon /> : <WarningIcon />}
+                                label={skip.allowed_on_road ? "Road Legal" : "Permit Needed"}
+                                size="small"
+                                sx={{
+                                    backgroundColor: skip.allowed_on_road
                                         ? theme.palette.success.light
-                                        : theme.palette.warning.light
-                                ),
-                                fontWeight: 'bold'
-                            }}
-                        />
-                    </Tooltip>
+                                        : theme.palette.warning.light,
+                                    color: theme.palette.getContrastText(
+                                        skip.allowed_on_road
+                                            ? theme.palette.success.light
+                                            : theme.palette.warning.light
+                                    ),
+                                    fontWeight: 'bold',
+                                    maxWidth: '48%',
+                                    '& .MuiChip-label': {
+                                        overflow: 'hidden',
+                                        textOverflow: 'ellipsis'
+                                    }
+                                }}
+                            />
+                        </Tooltip>
+
+                        {/* Heavy Waste Indicator */}
+                        <Tooltip
+                            title={skip.allows_heavy_waste
+                                ? "Heavy waste allowed (soil, rubble, etc.)"
+                                : "Does not allow heavy waste (soil, rubble, etc.)"
+                            }
+                            placement="top"
+                        >
+                            <Chip
+                                icon={<ScaleIcon />}
+                                label={skip.allows_heavy_waste ? "Heavy Waste" : "No Heavy Waste"}
+                                size="small"
+                                sx={{
+                                    backgroundColor: skip.allows_heavy_waste
+                                        ? theme.palette.success.light
+                                        : theme.palette.warning.light,
+                                    color: theme.palette.getContrastText(
+                                        skip.allows_heavy_waste
+                                            ? theme.palette.success.light
+                                            : theme.palette.warning.light
+                                    ),
+                                    fontWeight: 'bold',
+                                    maxWidth: '55%',
+                                    '& .MuiChip-label': {
+                                        overflow: 'hidden',
+                                        textOverflow: 'ellipsis'
+                                    }
+                                }}
+                            />
+                        </Tooltip>
+                    </Box>
                 </Box>
 
                 <CardContent>
@@ -112,46 +159,35 @@ const SkipCard = ({ skip, loading }) => {
                         )}
                     </Box>
 
-                    <Typography variant="h5" sx={cardStyles.price}>
-                        {formatPrice(skip.price)}
-                    </Typography>
+                    <Box sx={{ display: 'flex', alignItems: 'baseline', gap: 1, mb: 1 }}>
+                        <Typography variant="h5" sx={cardStyles.price}>
+                            {formatPrice(skip.price)}
+                        </Typography>
+                        <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+                            +VAT
+                        </Typography>
+                    </Box>
 
-                    {/* Heavy Waste Indicator */}
-                    <Typography
-                        variant="caption"
-                        sx={{
-                            display: 'block',
-                            color: skip.allows_heavy_waste
-                                ? theme.palette.success.main
-                                : theme.palette.warning.main,
-                            fontWeight: 'bold',
-                            mb: 1
-                        }}
-                    >
-                        {skip.allows_heavy_waste
-                            ? "✓ Heavy waste allowed"
-                            : "✗ No heavy waste"
-                        }
-                    </Typography>
-
-                    <Box sx={{ display: 'flex', gap: 1, mb: 1 }}>
+                    <Stack direction="row" spacing={1} sx={{ mb: 2 }}>
                         <Chip
                             label={`${skip.size} yd³`}
                             color="secondary"
+                            sx={{ fontWeight: 'bold' }}
                         />
                         <Chip
                             label={`${skip.hire_period_days} day hire`}
                             variant="outlined"
+                            sx={{ fontWeight: '500' }}
                         />
-                    </Box>
+                    </Stack>
 
                     <Typography variant="body2" sx={cardStyles.description}>
                         {skip.description}
                     </Typography>
 
-                    <Divider sx={{ my: 1 }} />
+                    <Divider sx={{ my: 2 }} />
 
-                    <Box>
+                    <Box sx={{ maxHeight: 120, overflowY: 'auto', pr: 1 }}>
                         {skip.features.map((feature, index) => (
                             <Typography
                                 key={index}
@@ -169,8 +205,10 @@ const SkipCard = ({ skip, loading }) => {
                         variant={isSelected ? "contained" : "outlined"}
                         color="primary"
                         fullWidth
+                        size="medium"
+                        sx={{ fontWeight: 'bold' }}
                     >
-                        {isSelected ? 'Selected' : 'Select'}
+                        {isSelected ? 'Selected' : 'Select Skip'}
                     </Button>
                 </Box>
             </Card>
