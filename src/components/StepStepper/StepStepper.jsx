@@ -16,14 +16,13 @@ import {
 } from '@mui/icons-material';
 
 const steps = [
-    { label: 'Address', icon: <AddressIcon /> },
-    { label: 'Waste Type', icon: <GardenWasteIcon /> },
-    { label: 'Select Skip', icon: <SkipIcon /> },
-    { label: 'Permit Check', icon: <PermitIcon /> },
-    { label: 'Choose Date', icon: <DateIcon /> },
-    { label: 'Payment', icon: <PaymentIcon /> },
+    { label: 'Address', icon: <AddressIcon fontSize='large' /> },
+    { label: 'Waste Type', icon: <GardenWasteIcon fontSize='large' /> },
+    { label: 'Select Skip', icon: <SkipIcon fontSize='large' /> },
+    { label: 'Permit Check', icon: <PermitIcon fontSize='large' /> },
+    { label: 'Choose Date', icon: <DateIcon fontSize='large' /> },
+    { label: 'Payment', icon: <PaymentIcon fontSize='large' /> },
 ];
-
 
 
 const StepStepper = ({ activeStep }) => {
