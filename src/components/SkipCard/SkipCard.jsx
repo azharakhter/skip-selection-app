@@ -54,6 +54,11 @@ const SkipCard = ({ skip, loading }) => {
     // Get image based on skip size
     const skipImage = sizeToImage[skip.size] || defaultYard;
 
+    const handleClick = () => {
+        return null;
+    };
+
+
     return (
         <Fade in={!loading} timeout={500}>
             <Card
@@ -80,7 +85,7 @@ const SkipCard = ({ skip, loading }) => {
                         display: 'flex',
                         justifyContent: 'space-between',
                         px: 1,
-                        gap: 1
+                        gap: 1,
                     }}>
                         {/* Road Allowance */}
                         <Tooltip
@@ -89,6 +94,7 @@ const SkipCard = ({ skip, loading }) => {
                                 : "Not allowed on public roads - Permit required"
                             }
                             placement="top"
+                            disableInteractive
                         >
                             <Chip
                                 icon={skip.allowed_on_road ? <LocalShippingIcon /> : <WarningIcon />}
@@ -110,6 +116,7 @@ const SkipCard = ({ skip, loading }) => {
                                         textOverflow: 'ellipsis'
                                     }
                                 }}
+                                onClick={handleClick}
                             />
                         </Tooltip>
 
@@ -120,11 +127,13 @@ const SkipCard = ({ skip, loading }) => {
                                 : "Does not allow heavy waste (soil, rubble, etc.)"
                             }
                             placement="top"
+                            disableInteractive
                         >
                             <Chip
                                 icon={<ScaleIcon />}
                                 label={skip.allows_heavy_waste ? "Heavy Waste" : "No Heavy Waste"}
                                 size="small"
+                                onClick={handleClick}
                                 sx={{
                                     backgroundColor: skip.allows_heavy_waste
                                         ? theme.palette.success.light
