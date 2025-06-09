@@ -5,17 +5,26 @@ import {
     StepLabel,
     Box
 } from '@mui/material';
+
 import {
-    AddressIcon,
-    GardenWasteIcon,
-    SkipIcon
-} from './StepIcons';
+    Home as AddressIcon,
+    DeleteSweep as GardenWasteIcon,
+    Inventory2 as SkipIcon,
+    Gavel as PermitIcon,
+    Event as DateIcon,
+    Payment as PaymentIcon,
+} from '@mui/icons-material';
 
 const steps = [
     { label: 'Address', icon: <AddressIcon /> },
     { label: 'Waste Type', icon: <GardenWasteIcon /> },
-    { label: 'Skip Size', icon: <SkipIcon /> },
+    { label: 'Select Skip', icon: <SkipIcon /> },
+    { label: 'Permit Check', icon: <PermitIcon /> },
+    { label: 'Choose Date', icon: <DateIcon /> },
+    { label: 'Payment', icon: <PaymentIcon /> },
 ];
+
+
 
 const StepStepper = ({ activeStep }) => {
     return (

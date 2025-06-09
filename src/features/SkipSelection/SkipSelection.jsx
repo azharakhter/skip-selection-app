@@ -30,8 +30,6 @@ const SkipSelection = () => {
     const { selectedSkip, nextStep } = useSelection();
     const [snackbarOpen, setSnackbarOpen] = React.useState(false);
 
-    console.log('skips', skips);
-
     const handleRetry = () => {
         refetch();
     };
@@ -133,7 +131,7 @@ const SkipSelection = () => {
                             }
                         }}
                     >
-                        Continue to Checkout
+                        Next
                     </Button>
                 </Box>
             </Container>
