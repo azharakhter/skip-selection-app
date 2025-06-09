@@ -3,20 +3,21 @@ export const cardStyles = {
         border: isSelected
             ? `2px solid ${theme.palette.primary.main}`
             : `1px solid ${theme.palette.divider}`,
-        borderRadius: theme.shape.borderRadius,
-        height: '100%',
-        display: 'flex',
-        flexDirection: 'column',
+        // borderRadius: theme.shape.borderRadius * 2,
+        overflow: 'hidden',
         transition: 'all 0.3s ease',
         cursor: 'pointer',
         '&:hover': {
             transform: 'translateY(-5px)',
-            boxShadow: theme.shadows[8],
+            boxShadow: theme.shadows[6],
             borderColor: isSelected
                 ? theme.palette.primary.main
                 : theme.palette.grey[400],
         }
     }),
+    image: {
+        objectFit: 'cover',
+    },
     header: {
         display: 'flex',
         justifyContent: 'space-between',
@@ -43,15 +44,9 @@ export const cardStyles = {
         mb: 2,
         minHeight: '3em',
     },
-    features: {
-        mb: 2,
-    },
     featureItem: {
         color: 'text.secondary',
         fontSize: '0.9rem',
         mb: 0.5,
     },
-    button: {
-        mt: 'auto',
-    }
 };

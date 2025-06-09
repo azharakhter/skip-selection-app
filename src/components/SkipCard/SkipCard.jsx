@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-
+import React from 'react';
 import {
     Card,
     CardContent,
@@ -7,13 +6,28 @@ import {
     Button,
     Box,
     Fade,
-    Chip
+    Chip,
+    CardMedia,
+    Divider,
 } from '@mui/material';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import { useTheme } from '@mui/material/styles';
 import { formatPrice } from '../../utils/formatters';
 import { cardStyles } from './SkipCard.styles';
 import { useSelection } from '../../features/SkipSelection/selectionContext';
+import defaultYard from "../../assets/images/40-yarder-skip.jpg"
+import Yard4 from "../../assets/images/40-yarder-skip.jpg"
+import Yard5 from "../../assets/images/40-yarder-skip.jpg"
+import Yard6 from "../../assets/images/40-yarder-skip.jpg"
+import Yard8 from "../../assets/images/40-yarder-skip.jpg"
+import Yard10 from "../../assets/images/40-yarder-skip.jpg"
+import Yard14 from "../../assets/images/40-yarder-skip.jpg"
+import Yard16 from "../../assets/images/40-yarder-skip.jpg"
+import Yard20 from "../../assets/images/40-yarder-skip.jpg"
+import Yard40 from "../../assets/images/40-yarder-skip.jpg"
+
+
+
 
 const SkipCard = ({ skip, loading }) => {
     const theme = useTheme();
@@ -27,6 +41,15 @@ const SkipCard = ({ skip, loading }) => {
                 onClick={() => setSelectedSkip(skip)}
                 elevation={isSelected ? 8 : 2}
             >
+                {/* Image */}
+                <CardMedia
+                    component="img"
+                    height="180"
+                    image={skip.image || defaultYard}
+                    alt={skip.name}
+                    sx={cardStyles.image}
+                />
+
                 <CardContent>
                     <Box sx={cardStyles.header}>
                         <Typography variant="h6" sx={cardStyles.title}>
@@ -54,23 +77,30 @@ const SkipCard = ({ skip, loading }) => {
                         {skip.description}
                     </Typography>
 
-                    <Box sx={cardStyles.features}>
+                    <Divider sx={{ my: 1 }} />
+
+                    <Box>
                         {skip.features.map((feature, index) => (
-                            <Typography key={index} variant="body2" sx={cardStyles.featureItem}>
+                            <Typography
+                                key={index}
+                                variant="body2"
+                                sx={cardStyles.featureItem}
+                            >
                                 • {feature}
                             </Typography>
                         ))}
                     </Box>
                 </CardContent>
 
-                <Button
-                    variant={isSelected ? "contained" : "outlined"}
-                    color="primary"
-                    fullWidth
-                    sx={cardStyles.button}
-                >
-                    {isSelected ? 'Selected' : 'Select'}
-                </Button>
+                <Box sx={{ px: 2, pb: 2 }}>
+                    <Button
+                        variant={isSelected ? "contained" : "outlined"}
+                        color="primary"
+                        fullWidth
+                    >
+                        {isSelected ? 'Selected' : 'Select'}
+                    </Button>
+                </Box>
             </Card>
         </Fade>
     );

@@ -39,8 +39,8 @@ const SkipSelection = () => {
     };
 
     return (
-        <PageContainer>
-            <Container maxWidth="lg">
+        <PageContainer fullWidth>
+            <Container maxWidth="xl">
                 <StepStepper activeStep={2} />
 
                 <Typography
@@ -90,7 +90,7 @@ const SkipSelection = () => {
                         ))}
                     </ResponsiveGrid>
                 ) : (
-                    <ResponsiveGrid spacing={4}>
+                    <ResponsiveGrid spacing={3}>
                         {skips.map((skip) => (
                             <SkipCard
                                 key={skip.id}
