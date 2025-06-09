@@ -30,6 +30,8 @@ const SkipSelection = () => {
     const { selectedSkip, nextStep } = useSelection();
     const [snackbarOpen, setSnackbarOpen] = React.useState(false);
 
+    console.log('skips', skips);
+
     const handleRetry = () => {
         refetch();
     };
@@ -91,7 +93,7 @@ const SkipSelection = () => {
                     </ResponsiveGrid>
                 ) : (
                     <ResponsiveGrid spacing={3}>
-                        {skips.map((skip) => (
+                        {skips?.map((skip) => (
                             <SkipCard
                                 key={skip.id}
                                 skip={skip}

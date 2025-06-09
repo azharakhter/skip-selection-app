@@ -38,6 +38,7 @@ export const cardStyles = {
     sizeChip: {
         mb: 2,
         fontWeight: 'bold',
+        fontSize: '1rem',
     },
     description: {
         color: 'text.secondary',
