@@ -68,3 +68,185 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+
+
+
+
+
+
+💡 Skip Size Selection App - React Frontend Challenge
+Redesign of the skip size selection page for WeWantWaste.co.uk with enhanced UI/UX.
+
+🔗 Links
+GitHub Repository: [insert GitHub link]
+
+CodeSandbox Demo: [insert CodeSandbox link]
+
+Live Demo: [insert live site link]
+
+📚 Table of Contents
+Project Overview
+
+Folder Structure
+
+Key Features
+
+Technical Approach
+
+Installation
+
+Available Scripts
+
+Dependencies
+
+References
+
+🚀 Project Overview
+This project is a redesign of the skip size selection page focusing on:
+
+✅ Modern, responsive UI (Material UI)
+
+🌗 Light/Dark mode support
+
+⚙️ Optimized API handling with Axios
+
+🧱 Feature-based architecture
+
+⚠️ Comprehensive error handling
+
+🔁 Reusable logic via custom hooks
+
+
+📁 Folder Structure
+css
+Copy
+Edit
+src/
+├── assets/
+│   ├── images/
+│   └── styles/
+│       ├── globalStyles.js
+│       └── theme.js
+├── features/
+│   └── SkipSelection/
+│       ├── components/
+│       ├── hooks/
+│       ├── services/
+│       ├── utils/
+│       ├── SkipSelection.jsx
+│       └── selectionContext.js
+├── App.js
+└── index.js
+
+
+🧩 Benefits of Feature-Based Architecture
+🛠️ Maintainability: All feature code colocated for easy updates
+
+🧱 Scalability: Add new features without restructuring
+
+👥 Team Efficiency: Parallel development across features
+
+🚪 Clear Boundaries: Minimize coupling
+
+🧪 Simplified Testing: Features testable in isolation
+
+📖 Reference: Feature-Sliced Design
+
+
+🔑 Key Features
+1. API Services
+Centralized API handling:
+
+✅ Configured Axios instance
+
+🔁 Request/response interceptors
+
+🧰 Type-safe responses with JSDoc
+
+❗ Error handling middleware
+
+
+2. Custom Hooks
+useSkips: Data fetch and state management
+
+useWindowSize: Responsive behavior
+
+useFormValidation: Input validation
+
+
+3. UI Components with Material UI
+🎨 Themed and consistent design
+
+🖥️ Responsive grid layout
+
+🌗 Dark/Light mode
+
+🎞️ Animated using Framer Motion
+
+♿ Accessible with ARIA
+
+4. Utility Functions
+errorHandler.js: Standard error formatting
+
+formatters.js: Data transformation helpers
+
+validators.js: Validation logic
+
+responsive.js: Media query utilities
+
+⚙️ Technical Approach
+State Management: React Context API
+
+Styling: Material UI + styled-components
+
+API: Axios with interceptors
+
+Performance: useMemo, useCallback, React.memo
+
+Responsiveness: Mobile-first with breakpoints
+
+Accessibility: Semantic HTML + ARIA attributes
+
+🧪 Installation
+bash
+Copy
+Edit
+git clone https://github.com/yourusername/skip-selection-app.git
+cd skip-selection-app
+npm install
+npm start
+📜 Available Scripts
+npm start: Run development server
+
+npm test: Launch test runner
+
+npm run build: Create production build
+
+npm run lint: Lint code using ESLint
+
+npm run format: Format code with Prettier
+
+📦 Dependencies
+React 18
+
+Material UI 5
+
+Axios
+
+Framer Motion
+
+Styled Components
+
+React Icons
+
+📚 References
+Material UI Documentation
+
+React Best Practices
+
+Feature-Sliced Design
+
+Axios Documentation
+
+Framer Motion Documentation
