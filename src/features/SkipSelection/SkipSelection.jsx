@@ -106,19 +106,24 @@ const SkipSelection = () => {
 
                 <Box sx={{
                     display: 'flex',
+                    flexDirection: { xs: 'column', sm: 'row' },
                     justifyContent: 'space-between',
-                    alignItems: 'center',
+                    alignItems: { xs: 'stretch', sm: 'center' },
                     mt: 6,
                     position: 'sticky',
                     bottom: 20,
                     zIndex: 100,
                     backgroundColor: 'background.paper',
                     py: 2,
-                    borderRadius: theme.shape.borderRadius,
+                    borderRadius: {
+                        xs: 0,             // No border radius on small screens
+                        sm: theme.shape.borderRadius,  // Default radius on sm and up
+                    },
                     boxShadow: theme.shadows[2],
-                    px: 3
+                    px: 3,
+                    gap: 2
                 }}>
-                    <Box>
+                    <Box sx={{ flex: 1 }}>
                         <Typography variant="caption" sx={{
                             color: 'text.secondary',
                             display: 'block',
@@ -128,11 +133,17 @@ const SkipSelection = () => {
                         </Typography>
 
                         {selectedSkip && (
-                            <Box sx={{ display: 'flex', alignItems: 'center', mt: 1 }}>
-                                <Typography variant="subtitle1" sx={{ fontWeight: 'bold', mr: 2 }}>
+                            <Box sx={{
+                                display: 'flex',
+                                flexWrap: 'wrap',
+                                alignItems: 'center',
+                                mt: 1,
+                                gap: 1
+                            }}>
+                                <Typography variant="subtitle1" sx={{ fontWeight: 'bold' }}>
                                     {selectedSkip.name}
                                 </Typography>
-                                <Typography variant="subtitle1" sx={{ fontWeight: 'bold', color: 'primary.main', mr: 2 }}>
+                                <Typography variant="subtitle1" sx={{ fontWeight: 'bold', color: 'primary.main' }}>
                                     {formatPrice(selectedSkip.price_before_vat)}
                                 </Typography>
                                 <Typography variant="subtitle1" sx={{ fontWeight: 'medium' }}>
@@ -142,17 +153,22 @@ const SkipSelection = () => {
                         )}
                     </Box>
 
-                    <Box>
+                    <Box sx={{
+                        display: 'flex',
+                        flexDirection: { xs: 'column-reverse', sm: 'row' },
+                        gap: 2,
+                        width: { xs: '100%', sm: 'auto' },
+                        mt: { xs: 2, sm: 0 }
+                    }}>
                         <Button
                             variant="outlined"
                             size="large"
+                            fullWidth={true}
                             startIcon={<ArrowBackIcon />}
                             sx={{
                                 py: 1.5,
-                                px: 4,
                                 fontWeight: 'bold',
-                                fontSize: '1rem',
-                                mr: 2
+                                fontSize: '1rem'
                             }}
                         >
                             Back
@@ -160,11 +176,11 @@ const SkipSelection = () => {
                         <Button
                             variant="contained"
                             size="large"
+                            fullWidth={true}
                             disabled={!selectedSkip}
                             onClick={() => { }}
                             sx={{
                                 py: 1.5,
-                                px: 6,
                                 fontWeight: 'bold',
                                 fontSize: '1.1rem',
                                 transform: 'scale(1)',
